@@ -2,7 +2,7 @@ name: CI Pipeline
  
 on:
   push:
-    branches: [main]  # Запускать только при пуше в ветку main
+    branches: [master]  # Запускать только при пуше в ветку master
  
 jobs:
   build:
