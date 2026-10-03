@@ -1,7 +1,0 @@
-serivces:
-  backend:
-    build:
-      context: ./Dockerfile
-  environment:
-    PORT: 4545
-  ports: [4545:4545]
