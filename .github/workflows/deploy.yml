@@ -22,7 +22,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
 
       - name: Build and push image to Docker Hub
-        id: build
+        id: build_image
         env:
           IMAGE_SHA: ${{ vars.DOCKER_USER }}/backend:sha-${{ github.sha }}
           IMAGE_LATEST: ${{ vars.DOCKER_USER }}/backend:latest
