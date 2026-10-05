@@ -28,7 +28,8 @@ jobs:
           IMAGE_LATEST: ${{ vars.DOCKER_USER }}/backend:latest
         run: |
           set -e
-          echo "$IMAGE_SHA"
+          echo "DEBUG IMAGE_SHA: [$IMAGE_SHA]"
+          echo "DEBUG IMAGE_LATEST: [$IMAGE_LATEST]"
           docker build -t $IMAGE_SHA -t $IMAGE_LATEST ./
           docker push $IMAGE_SHA
           docker push $IMAGE_LATEST
