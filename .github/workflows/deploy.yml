@@ -27,16 +27,10 @@ jobs:
           IMAGE_SHA: ${{ vars.DOCKER_USER }}/backend:sha-${{ github.sha }}
           IMAGE_LATEST: ${{ vars.DOCKER_USER }}/backend:latest
         run: |
-          set -e
-          echo "DEBUG IMAGE_SHA: [$IMAGE_SHA]"
-          echo "DEBUG IMAGE_LATEST: [$IMAGE_LATEST]"
           docker build -t $IMAGE_SHA -t $IMAGE_LATEST ./
           docker push $IMAGE_SHA
           docker push $IMAGE_LATEST
           echo "image_sha=$IMAGE_SHA" >> $GITHUB_OUTPUT
-
-      - name: Debug image sha
-        run: echo "after build IMAGE_SHA - [$IMAGE_SHA]"
 
   deploy:
     needs: [checks, build]
@@ -50,7 +44,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "before deploy IMAGE_SHA [${{ needs.build.outputs.image_sha }}]"
             cd /var/www/myapp/
             sed -i "s|DOCKER_IMAGE=.*|DOCKER_IMAGE=${{ needs.build.outputs.image_sha }}|" .env
             docker compose up --no-deps -d backend
