@@ -27,6 +27,8 @@ jobs:
           IMAGE_SHA: ${{ vars.DOCKER_USER }}/backend:sha-${{ github.sha }}
           IMAGE_LATEST: ${{ vars.DOCKER_USER }}/backend:latest
         run: |
+          set -e
+          echo "$IMAGE_SHA"
           docker build -t $IMAGE_SHA -t $IMAGE_LATEST ./
           docker push $IMAGE_SHA
           docker push $IMAGE_LATEST
